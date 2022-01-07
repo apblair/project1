@@ -1,11 +1,12 @@
-name: Test
+name: Test seqparse
 on: [push]
 jobs:
+  Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-			- name: Install tool 
-				run: | 
-				pip install tool
-			- name: Run pytest
-				run: |
-				pytest -v
+      - name: Install tool
+        run: |
+          pip install tool
+      - name: Run pytest
+        run: |
+          pytest -v
