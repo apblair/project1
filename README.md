@@ -1,4 +1,4 @@
-![example workflow](https://github.com/apblair/project1/actions/workflows/actions.yml/badge.svg)
+![seqparse Test](https://github.com/apblair/project1/actions/workflows/actions.yml/badge.svg)
 
 
 # Project 1
