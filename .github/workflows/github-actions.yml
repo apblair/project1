@@ -4,6 +4,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 			- name: Install tool 
-				run: pip install tool
+				run: | 
+				pip install tool
 			- name: Run pytest
-				run: pytest -v
+				run: |
+				pytest -v
