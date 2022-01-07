@@ -16,7 +16,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-			- name: Install seqparse
+      - name: Install seqparse
         run: |
           pip install .
       - name: Run pytest
