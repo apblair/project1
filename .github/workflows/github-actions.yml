@@ -3,5 +3,7 @@ on: [push]
 jobs:
     runs-on: ubuntu-latest
     steps:
-      - run: pip install tool
-			- run: pytest -v
+			- name: Install tool 
+				run: pip install tool
+			- name: Run pytest
+				run: pytest -v
