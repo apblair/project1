@@ -9,8 +9,11 @@ def main():
     The main function
     """
     # Create instance of FastaParser
+    FastaParser()
+
     # Create instance of FastqParser
-        
+    FastqParser()
+
     # For each record of FastaParser, Transcribe the sequence
     # and print it to console
        

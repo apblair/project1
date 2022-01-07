@@ -1,7 +1,6 @@
 import io
 from typing import Tuple, Union
 
-
 class Parser:
     """
     Base Class for Parsing Algorithms
@@ -96,7 +95,10 @@ class Parser:
             # and implement an exception for the error you will find in
             # the error message you receive. 
             while True:
-                rec = self.get_record(f_obj)
+                try:
+                    rec = self.get_record(f_obj)
+                except ValueError:
+                    break
                 yield rec
 
     def _get_record(self, f_obj: io.TextIOWrapper) -> Union[Tuple[str, str], Tuple[str, str, str]]:
@@ -108,7 +110,6 @@ class Parser:
                 This function is not meant to be called by the Parser Class.
                 It is expected to be overridden by `FastaParser` and `FastqParser`""")
 
-
 class FastaParser(Parser):
     """
     Fasta Specific Parsing
@@ -117,7 +118,10 @@ class FastaParser(Parser):
         """
         returns the next fasta record
         """
-
+        fasta_rec = f_obj.readline(), f_obj.readline() # FASTA records have a header and sequence
+        end_of_file = ('','')
+        if fasta_rec == end_of_file: raise ValueError('End of file!')
+        return fasta_rec
 
 class FastqParser(Parser):
     """
@@ -127,4 +131,8 @@ class FastqParser(Parser):
         """
         returns the next fastq record
         """
-
+        fastq_rec = f_obj.readline(), f_obj.readline(), f_obj.readline() # FASTQ records have a header, sequence, and quality score
+        end_of_file = ('','','')
+        if fastq_rec == end_of_file:
+            raise ValueError('End of file!')
+        return fastq_rec
