@@ -31,7 +31,6 @@ def test_FastaParser():
     fasta_file = './data/test.fa'
     unit_test_file = "./tests/unit_test.fa"
     fasta_rec = FastaParser(fasta_file)
-    # Example of how to check md5
     with open(unit_test_file,"w") as unit_test_fa:
         for header,seq in fasta_rec:
             unit_test_fa.write(header+seq)
@@ -57,3 +56,4 @@ def test_FastqParser():
     unit_test_m5 = hashlib.md5(open(unit_test_file,'rb').read()).hexdigest()
     og_m5 = hashlib.md5(open(fastq_file,'rb').read()).hexdigest()
     assert unit_test_m5 == og_m5
+    
