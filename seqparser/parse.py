@@ -97,7 +97,7 @@ class Parser:
             while True:
                 try:
                     rec = self.get_record(f_obj)
-                except ValueError:
+                except EOFError:
                     break
                 yield rec
 
@@ -120,7 +120,7 @@ class FastaParser(Parser):
         """
         fasta_rec = f_obj.readline().strip(), f_obj.readline().strip() # FASTA records have a header and sequence
         end_of_file = ('','')
-        if fasta_rec == end_of_file: raise ValueError('End of file!')
+        if fasta_rec == end_of_file: raise EOFError
         return fasta_rec
 
 class FastqParser(Parser):
@@ -133,6 +133,6 @@ class FastqParser(Parser):
         """
         fastq_rec = f_obj.readline(), f_obj.readline(),f_obj.readline(),f_obj.readline() # FASTQ records have a header, sequence, '+', and quality score
         end_of_file = ('','','','')
-        if fastq_rec == end_of_file: raise ValueError('End of file!')
+        if fastq_rec == end_of_file: raise EOFError
         fastq_rec = fastq_rec[0].strip(), fastq_rec[1].strip(), fastq_rec[3].strip()
         return fastq_rec
