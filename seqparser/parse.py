@@ -142,4 +142,5 @@ class FastqParser(Parser):
         end_of_file = ('','','','')
         if fastq_rec == end_of_file: raise ValueError('End of file!')
         fastq_rec = fastq_rec[0].strip(), fastq_rec[1], fastq_rec[3]
+        print(fastq_rec)
         return fastq_rec
