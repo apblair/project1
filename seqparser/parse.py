@@ -138,7 +138,7 @@ class FastqParser(Parser):
         """
         returns the next fastq record
         """
-        fastq_rec = f_obj.readline(), f_obj.readline(),f_obj.readline(),f_obj.readline() # FASTQ records have a header, sequence, and quality score
+        fastq_rec = f_obj.readline(), f_obj.readline(),f_obj.readline(),f_obj.readline() # FASTQ records have a header, sequence, '+', and quality score
         end_of_file = ('','','','')
         if fastq_rec == end_of_file: raise ValueError('End of file!')
         fastq_rec = fastq_rec[0].strip(), fastq_rec[1], fastq_rec[3]
