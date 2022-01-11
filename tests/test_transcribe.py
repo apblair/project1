@@ -35,3 +35,6 @@ def test_reverse_transcribe():
     reverse transcribe function here.
     """
     pass
+    
+test_transcribe()
+test_reverse_transcribe()
