@@ -33,8 +33,8 @@ def test_FastaParser():
     
     fasta_rec_length = 2
     for fasta_tuple in fasta_rec:
-        assert type(fasta_tuple) is tuple
-        assert len(fasta_tuple) == fasta_rec_length
+        assert type(fasta_tuple) is tuple,  "fail: fasta record is not a tuple."
+        assert len(fasta_tuple) == fasta_rec_length, "fail: fasta record does not contain a tuple of length 2."
     
     unit_test_file = "./tests/unit_test.fa"
     with open(unit_test_file,"w") as unit_test_fa:
@@ -53,7 +53,13 @@ def test_FastqParser():
     reads in the example Fastq File.
     """
     fastq_file = './data/test.fq'
-    fastq_rec = FastqParser(fastq_file)    
+    fastq_rec = FastqParser(fastq_file)
+
+    fastq_rec_length = 3
+    for fastq_tuple in fastq_rec:
+        assert type(fastq_tuple) is tuple, "fail: fastq record is not a tuple."
+        assert len(fastq_tuple) == fastq_rec_length, "fail: fastq record does not contain a tuple of length 3."
+
     unit_test_file = "./tests/unit_test.fq"
     with open(unit_test_file,"w") as unit_test_fq:
         for header,seq,qual in fastq_rec:
@@ -63,5 +69,5 @@ def test_FastqParser():
     og_m5 = hashlib.md5(open(fastq_file,'rb').read()).hexdigest()
     assert unit_test_m5 == og_m5
 
-# test_FastaParser()
-# test_FastqParser()
+test_FastaParser()
+test_FastqParser()
