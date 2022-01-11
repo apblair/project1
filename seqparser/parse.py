@@ -118,7 +118,7 @@ class FastaParser(Parser):
         """
         returns the next fasta record
         """
-        fasta_rec = f_obj.readline(), f_obj.readline() # FASTA records have a header and sequence
+        fasta_rec = f_obj.readline().strip(), f_obj.readline().strip() # FASTA records have a header and sequence
         end_of_file = ('','')
         if fasta_rec == end_of_file: raise ValueError('End of file!')
         return fasta_rec
@@ -127,12 +127,23 @@ class FastqParser(Parser):
     """
     Fastq Specific Parsing
     """
+    def _n_stripper(self, rec: str) -> str:
+        """
+        strip '\n'
+        """
+        if "\n" in rec:
+            return rec.strip()
+
     def _get_record(self, f_obj: io.TextIOWrapper) -> Tuple[str, str, str]:
         """
         returns the next fastq record
         """
-        fastq_rec = f_obj.readline(), f_obj.readline(), f_obj.readline() # FASTQ records have a header, sequence, and quality score
+        fastq_rec = self._n_stripper(f_obj.readline()),\
+         self._n_stripper(f_obj.readline()), \
+         self._n_stripper(f_obj.readline()) # FASTQ records have a header, sequence, and quality score
         end_of_file = ('','','')
-        if fastq_rec == end_of_file:
-            raise ValueError('End of file!')
+        if fastq_rec == end_of_file: raise ValueError('End of file!')
+        if None in fastq_rec:
+            print('Warning: ' + str(sum(x is None for x in fastq_rec)) + ' None detected in fastq record.')
+            print(fastq_rec)
         return fastq_rec

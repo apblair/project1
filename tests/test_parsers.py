@@ -29,11 +29,17 @@ def test_FastaParser():
     reads in the example Fasta File.
     """
     fasta_file = './data/test.fa'
-    unit_test_file = "./tests/unit_test.fa"
     fasta_rec = FastaParser(fasta_file)
+    
+    fasta_rec_length = 2
+    for fasta_tuple in fasta_rec:
+        assert type(fasta_tuple) is tuple
+        assert len(fasta_tuple) == fasta_rec_length
+    
+    unit_test_file = "./tests/unit_test.fa"
     with open(unit_test_file,"w") as unit_test_fa:
         for header,seq in fasta_rec:
-            unit_test_fa.write(header+seq)
+            unit_test_fa.write(header+'\n'+seq+'\n')
     unit_test_fa.close()
     unit_test_m5 = hashlib.md5(open(unit_test_file,'rb').read()).hexdigest()
     og_m5 = hashlib.md5(open(fasta_file,'rb').read()).hexdigest()
@@ -47,8 +53,8 @@ def test_FastqParser():
     reads in the example Fastq File.
     """
     fastq_file = './data/test.fq'
+    fastq_rec = FastqParser(fastq_file)    
     unit_test_file = "./tests/unit_test.fq"
-    fastq_rec = FastqParser(fastq_file)
     with open(unit_test_file,"w") as unit_test_fq:
         for header,seq,qual in fastq_rec:
             unit_test_fq.write(header+seq+qual)
@@ -56,4 +62,6 @@ def test_FastqParser():
     unit_test_m5 = hashlib.md5(open(unit_test_file,'rb').read()).hexdigest()
     og_m5 = hashlib.md5(open(fastq_file,'rb').read()).hexdigest()
     assert unit_test_m5 == og_m5
-    
+
+# test_FastaParser()
+# test_FastqParser()
