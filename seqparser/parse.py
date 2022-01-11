@@ -127,13 +127,6 @@ class FastqParser(Parser):
     """
     Fastq Specific Parsing
     """
-    def _n_stripper(self, rec: str) -> str:
-        """
-        strip '\n'
-        """
-        if "\n" in rec:
-            return rec.strip()
-
     def _get_record(self, f_obj: io.TextIOWrapper) -> Tuple[str, str, str]:
         """
         returns the next fastq record
@@ -141,6 +134,5 @@ class FastqParser(Parser):
         fastq_rec = f_obj.readline(), f_obj.readline(),f_obj.readline(),f_obj.readline() # FASTQ records have a header, sequence, '+', and quality score
         end_of_file = ('','','','')
         if fastq_rec == end_of_file: raise ValueError('End of file!')
-        fastq_rec = fastq_rec[0].strip(), fastq_rec[1], fastq_rec[3]
-        print(fastq_rec)
+        fastq_rec = fastq_rec[0].strip(), fastq_rec[1].strip(), fastq_rec[3].strip()
         return fastq_rec
