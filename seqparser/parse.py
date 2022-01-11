@@ -138,19 +138,8 @@ class FastqParser(Parser):
         """
         returns the next fastq record
         """
-        # fastq_rec = f_obj.readline(), f_obj.readline(),f_obj.readline() # FASTQ records have a header, sequence, and quality score
-        # end_of_file = ('','','')
+        fastq_rec = f_obj.readline(), f_obj.readline(),f_obj.readline(),f_obj.readline() # FASTQ records have a header, sequence, and quality score
+        end_of_file = ('','','','')
         if fastq_rec == end_of_file: raise ValueError('End of file!')
-        header, seq, plus, qual = fastq_rec[0].strip(), fastq_rec[1].strip(), fastq_rec[2].strip(), next(fastq_rec)
-        print(fastq_rec)
-        # fastq_rec = self._n_stripper(/)
-        # print(fastq_rec)
-        # print(len(fastq_rec))
-        # fastq_rec = tuple(self._n_stripper(fastq_rec[0]), self._n_stripper(fastq_rec[1]), self._n_stripper(fastq_rec[2]))
-        # print(fastq_rec[0], fastq_rec[1], fastq_rec[2], "\n")
-        # print(fastq_rec)
-        # print(fastq_rec[0], fastq_rec)
-        # if None in fastq_rec:
-        #     print('class FastqParser  Warning: ' + str(sum(x is None for x in fastq_rec)) + ' None detected in fastq record.')
-        #     print(fastq_rec)
+        fastq_rec = fastq_rec[0].strip(), fastq_rec[1], fastq_rec[3]
         return fastq_rec

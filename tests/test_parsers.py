@@ -54,7 +54,6 @@ def test_FastqParser():
     """
     fastq_file = './data/test.fq'
     fastq_rec = FastqParser(fastq_file)
-
     fastq_rec_length = 3
     for fastq_tuple in fastq_rec:
         assert type(fastq_tuple) is tuple, "fail: fastq record is not a tuple."
@@ -63,7 +62,7 @@ def test_FastqParser():
     unit_test_file = "./tests/unit_test.fq"
     with open(unit_test_file,"w") as unit_test_fq:
         for header,seq,qual in fastq_rec:
-            unit_test_fq.write(header+seq+qual)
+            unit_test_fq.write(header+'\n'+seq + "+"+'\n'+qual)
     unit_test_fq.close()
     unit_test_m5 = hashlib.md5(open(unit_test_file,'rb').read()).hexdigest()
     og_m5 = hashlib.md5(open(fastq_file,'rb').read()).hexdigest()
